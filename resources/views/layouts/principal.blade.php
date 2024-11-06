@@ -13,16 +13,19 @@
             display: flex;
             width: 100%;
         }
+
         #sidebar-wrapper {
             width: 250px;
             height: 100vh;
             background-color: #343a40;
             color: #ffffff;
         }
+
         #sidebar-wrapper .list-group-item {
             background-color: #343a40;
             color: #ffffff;
         }
+
         #sidebar-wrapper .list-group-item:hover {
             background-color: #495057;
         }
@@ -44,6 +47,7 @@
         .navbar-custom .dropdown-item {
             color: #ffffff;
         }
+
         .navbar-custom .nav-link:hover,
         .navbar-custom .dropdown-item:hover {
             color: #dfe6f1;
@@ -67,7 +71,11 @@
 
         <!-- Conteúdo Principal -->
         <div class="container-fluid p-4">
-            @yield('content')
+            <div class="card">
+                <div class="card-body overflow-hidden p-lg-6">
+                    @yield('content')
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -76,7 +84,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Toggle the sidebar
-    document.getElementById("menu-toggle").onclick = function() {
+    document.getElementById("menu-toggle").onclick = function () {
         document.getElementById("wrapper").classList.toggle("toggled");
     };
 </script>

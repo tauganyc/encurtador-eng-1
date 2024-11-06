@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function routes()
+    {
+        return $this->hasMany(Route::class)->orderBy('created_at', 'desc')->get();
+    }
 }
