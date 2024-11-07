@@ -43,7 +43,7 @@
                             <td><a class="text-primary">{{ $route->url }}</a></td>
                             <td><a class="text-success">{{ route('redirect', $route->slug) }}</a></td>
                             <td class="w-25 text-center">
-                                <button class="btn btn-primary" id="copy" value="{{ route('redirect', $route->slug) }}" onclick="copyToClipboard()">Copiar</button>
+                                <button class="btn btn-primary" id="copy_{{$route->id}}" value="{{ route('redirect', $route->slug) }}" onclick="copyToClipboard({{$route->id}})">Copiar</button>
                                 <a href=""
                                    class="btn btn-info">Relatórios</a>
                                 <form action="{{ route('destroy', $route->id) }}"
@@ -66,17 +66,17 @@
     setTimeout(function () {
         document.querySelector('.alert').remove();
     }, 3000);
-    function copyToClipboard() {
-        const copyText = document.getElementById("copy");
+    function copyToClipboard(id) {
+        const copyText = document.getElementById("copy_"+id);
         var textArea = document.createElement("textarea");
         textArea.value = copyText.value;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand("Copy");
         textArea.remove();
-        document.getElementById("copy").innerHTML = "Copiado!";
+        document.getElementById("copy_"+id).innerHTML = "Copiado!";
         setTimeout(() => {
-            document.getElementById("copy").innerHTML = "Copiar";
+            document.getElementById("copy_"+id).innerHTML = "Copiar";
         }, 2000);
     }
 </script>
