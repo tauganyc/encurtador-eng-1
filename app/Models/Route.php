@@ -10,5 +10,11 @@ class Route extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $fillable = ['slug', 'url', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
