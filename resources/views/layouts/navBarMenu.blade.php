@@ -4,7 +4,7 @@
         <a href="{{route('index')}}" class="list-group-item list-group-item-action">Home</a>
         <form method="post" action="{{route('logout')}}">
             @csrf
-            <a type="submit" class="list-group-item list-group-item-action">Logout</a>
+            <button type="submit" class="list-group-item list-group-item-action">Logout</button>
         </form>
     </div>
 </div>
