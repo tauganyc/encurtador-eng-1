@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RouteRequest;
 use App\Models\Report;
 use App\Models\Route;
-use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {
@@ -14,21 +14,10 @@ class RouteController extends Controller
         $routes = $user->routes();
         return view('route.index', ['routes' => $routes]);
     }
-    public function store(Request $request)
+    public function store(RouteRequest $request)
     {
         $user = auth()->user();
-        $validate = $request->validate([
-            'url' => 'required|url',
-        ], [
-            'required' => 'O campo :attribute é obrigatório',
-            'url' => 'O campo :attribute deve ser uma URL válida',
-        ]);
-        $slug = substr(md5(uniqid()), 0, 6);
-        $route = Route::create([
-            'user_id' => $user->id,
-            'url' => $validate['url'],
-            'slug' => $slug,
-        ]);
+        $route = (new Route)->createRoute($user->id, $request->validated('url'));
         if (!$route) {
             return redirect()->back()->with('error', 'Erro ao encurtar a URL');
         }
@@ -51,12 +40,14 @@ class RouteController extends Controller
             return 'URL não encontrada';
         }
         $report = Report::where('route_id', $route->id)->where('date', date('Y-m-d'))->first();
+
         if (!$report) {
             Report::create([
                 'route_id' => $route->id,
                 'date' => date('Y-m-d'),
                 'clicks' => 1,
             ]);
+
         } else {
             $report->clicks++;
             $report->save();
