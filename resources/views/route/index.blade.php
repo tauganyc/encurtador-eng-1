@@ -44,7 +44,7 @@
                             <td><a class="text-success">{{ route('redirect', $route->slug) }}</a></td>
                             <td class="w-25 text-center">
                                 <button class="btn btn-primary" id="copy_{{$route->id}}" value="{{ route('redirect', $route->slug) }}" onclick="copyToClipboard({{$route->id}})">Copiar</button>
-                                <a href=""
+                                <a href="{{ route('report', $route->id) }}"
                                    class="btn btn-info">Relatórios</a>
                                 <form action="{{ route('destroy', $route->id) }}"
                                       method="post" class="d-inline">
